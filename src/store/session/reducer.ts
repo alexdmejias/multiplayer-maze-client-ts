@@ -9,12 +9,6 @@ import {
   SocketActionTypes
 } from '../middleware/socketio/types';
 
-function processStringMaze(mazeAsString: string): Maze {
-  return mazeAsString
-    .split('|')
-    .map(row => row.split(''))
-}
-
 function createGrid(num: number): Maze {
   return Array(num).fill(0).map(()=>Array(num).fill(0));
 }
@@ -45,7 +39,7 @@ export default function(state = initialState, action: SocketActionTypes) {
               draft.grid = {
                 columns: grid.columns,
                 rows: grid.rows,
-                maze: processStringMaze(grid.maze)
+                maze: grid.maze
               }
             }
             draft.currentState = currentState;

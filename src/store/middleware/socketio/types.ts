@@ -16,7 +16,7 @@ interface SocketEventAction {
       ids: string[]
     },
     grid: {
-      maze: string,
+      maze: number[][],
       rows: number,
       columns: number
     },

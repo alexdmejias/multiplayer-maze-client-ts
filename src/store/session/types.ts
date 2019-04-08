@@ -1,4 +1,4 @@
-export type Maze = string[][];
+export type Maze = number[][];
 
 export interface SessionState {
   grid: {
