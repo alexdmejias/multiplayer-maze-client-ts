@@ -29,7 +29,7 @@ export default function(state = initialState, action: SocketActionTypes) {
       switch (action.event) {
         case 'init-connection':
           return produce(state, draft => {
-            // draft.state = 'waiting';
+            draft.currentState = action.payload.currentState;
           });
 
         case 'state-change':

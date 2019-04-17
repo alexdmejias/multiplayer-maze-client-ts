@@ -1,89 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import {AppStoreState} from './store';
-import {ScoreboardState} from './store/scoreboard/types';
-import {UiState} from './store/ui/types';
-import {SessionState} from './store/session/types';
+import { HotKeys } from "react-hotkeys";
 import { Dispatch } from 'redux';
-import { changeModal } from "./store/ui/actions";
-
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Scoreboard from './components/scoreboard';
 import Maze from './components/maze';
 import { socketConnect } from './store/middleware/socketio/actions';
+// import { reset, themes } from 'react95';
 
-type props = {
-  mainMessage?: string
-  scoreboard: ScoreboardState,
-  ui: UiState,
-  session: SessionState,
-  changeModal: Function,
+// const ResetStyles = createGlobalStyle`
+//   ${reset}
+// `;
+
+type AppProps = {
   connect: Function
 }
 
-type myState = {
-  clicks: number;
-}
+const App = (props: AppProps) => {
+  useEffect(() => {
+    props.connect();
+  }, []);
 
-class App extends Component<props, myState> {
-  state: myState = {
-    clicks: 0
-  }
+  const keyMap = {
+    MOVE_NORTH: 'up',
+    MOVE_SOUTH: 'down',
+    MOVE_EAST: 'right',
+    MOVE_WEST: 'left'
+  };
 
-  handleClick = () => {
-    this.setState({
-      clicks: this.state.clicks + 1
-    })
-  }
-
-  resetClicks = () => {
-    console.log()
-    this.setState({
-      clicks: 0
-    });
-  }
-
-  wasd = (type?: string) => {
-    console.log(type)
-    this.props.changeModal(type)
-  }
-
-  componentDidMount() {
-    this.props.connect();
-  }
-
-  render() {
-    const {scoreboard} = this.props;
-    return (
+  return (
+    <HotKeys keyMap={keyMap}>
       <div className="App">
         <Scoreboard />
         <Maze />
-        <h1>{this.props.session.currentState}</h1>
-        {/* <h1 onClick={() => this.wasd()}>close</h1>
-        <h1 onClick={() => this.wasd('help')}>modal: {this.props.ui.modal}</h1>
-
-        {
-          this.props.ui.modal &&
-          <div>this is the modal</div>
-        } */}
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state: AppStoreState) => ({
-  scoreboard: state.scoreboard,
-  ui: state.ui,
-  session: state.session
-});
+    </HotKeys>
+  );
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  changeModal: (type?: string) => {
-    dispatch(changeModal(type))
-  },
   connect: () => {
-    dispatch(socketConnect())
+    dispatch(socketConnect());
   }
 })
 
-export default connect( mapStateToProps, mapDispatchToProps )(App);
+export default connect( null, mapDispatchToProps)(App);

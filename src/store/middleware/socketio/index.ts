@@ -10,7 +10,7 @@ type StateUnionKeyToValue = {
   [K in string]?: Function
 };
 
-function wasd(dispatch: Function): StateUnionKeyToValue {
+function getEventsToSusbscribeTo(dispatch: Function): StateUnionKeyToValue {
   return {
     // server sends this to only one client, when client joins
     'init-connection': (data: any) => {
@@ -52,7 +52,7 @@ const socketMiddleware = (store: {dispatch: Function}) => {
       console.log('attempting to connect to socket server...');
       socket = socketIo.connect('http://localhost:3005');
       // socket.on = _overWriteTX();
-      const eventsToListenTo = wasd(dispatch);
+      const eventsToListenTo = getEventsToSusbscribeTo(dispatch);
 
       for (let event in eventsToListenTo) {
         socket.on(event, eventsToListenTo[event]);

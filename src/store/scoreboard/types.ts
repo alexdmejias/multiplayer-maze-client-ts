@@ -20,4 +20,3 @@ interface ScoreboardUpdateAction {
 }
 
 export type ScoreboardActionTypes = ScoreboardUpdateAction ;
-
