@@ -7,11 +7,6 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Scoreboard from './components/scoreboard';
 import Maze from './components/maze';
 import { socketConnect } from './store/middleware/socketio/actions';
-// import { reset, themes } from 'react95';
-
-// const ResetStyles = createGlobalStyle`
-//   ${reset}
-// `;
 
 type AppProps = {
   connect: Function
@@ -23,10 +18,10 @@ const App = (props: AppProps) => {
   }, []);
 
   const keyMap = {
-    MOVE_NORTH: 'up',
-    MOVE_SOUTH: 'down',
-    MOVE_EAST: 'right',
-    MOVE_WEST: 'left'
+    MOVE_NORTH: ['up', 'w'],
+    MOVE_SOUTH: ['down', 's'],
+    MOVE_EAST: ['right', 'd'],
+    MOVE_WEST: ['left', 'a']
   };
 
   return (
