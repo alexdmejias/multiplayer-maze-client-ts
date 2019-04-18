@@ -4,26 +4,31 @@ body {
 
 .grid {
   background: white;
+  border: 2px solid black;
+  box-shadow: 10px 10px 0px black;
 }
 
 .cell {
   box-sizing: border-box;
-  /* border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: white;
-  border-right-width: 1px;
-  border-right-style: solid;
-  border-right-color: white; */
+  transition: background 200ms;
+  color: grey;
+  font-size: small;
 }
 
 .cell.visited {
-  background-color: grey;
-  color: black;
+  background-color: lightgrey;
 }
 
 .cell.visited.player {
-  /* background: tomato; */
   position: relative;
+}
+
+.cell.ending {
+  background-color: dodgerblue;
+}
+
+.cell.starting {
+  background-color: dodgerblue;
 }
 
 .cell.visited.player:after {
@@ -36,5 +41,5 @@ body {
   left: 0;
   box-sizing: border-box;
   margin: 10%;
-  border-radius: 100px;
+  border-radius: 10px;
 }
