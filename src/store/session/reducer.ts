@@ -18,6 +18,8 @@ const initialState: SessionState = {
     rows: 10,
     columns: 10,
     maze: createGrid(10),
+    starting: [0, 9],
+    ending: [9, 0]
   },
   currentState: 'waiting'
 }
@@ -30,17 +32,17 @@ export default function(state = initialState, action: SocketActionTypes) {
         case 'init-connection':
           return produce(state, draft => {
             draft.currentState = action.payload.currentState;
+            const {currentState, grid} = action.payload
+            if (currentState === 'playing') {
+              draft.grid = { ...grid };
+            }
           });
 
         case 'state-change':
           return produce(state, draft => {
             const {currentState, grid} = action.payload
             if (currentState === 'playing') {
-              draft.grid = {
-                columns: grid.columns,
-                rows: grid.rows,
-                maze: grid.maze
-              }
+              draft.grid = { ...grid}
             }
             draft.currentState = currentState;
           });

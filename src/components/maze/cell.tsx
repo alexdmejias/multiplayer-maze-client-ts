@@ -19,19 +19,23 @@ interface CellProps {
   id: string
   type: number
   size: number
-  player: boolean
-  visited: boolean
+  isPlayer: boolean
+  isVisited: boolean
+  isStarting: boolean
+  isEnding: boolean
 }
 
-const Cell = ({id, type, size, player, visited}: CellProps) => {
+const Cell = ({id, type, size, isPlayer, isVisited, isEnding, isStarting}: CellProps) => {
   const classes = classnames({
     cell: true,
-    visited,
-    player
+    visited: isVisited,
+    player: isPlayer,
+    starting: isStarting,
+    ending: isEnding
   });
 
   return (
-    <div className={classes} style={getCellStyles(size, type, player, visited)} >
+    <div className={classes} style={getCellStyles(size, type, isPlayer, isVisited)} >
       {id}
         <br />
       {type}

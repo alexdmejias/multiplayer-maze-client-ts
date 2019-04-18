@@ -18,7 +18,10 @@ interface SocketEventAction {
     grid: {
       maze: number[][],
       rows: number,
-      columns: number
+      columns: number,
+      starting: [number, number],
+      ending: [number, number],
+
     },
     currentState: 'waiting' | 'playing'
   }

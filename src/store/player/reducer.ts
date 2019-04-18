@@ -29,7 +29,7 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
         draft.row = row;
         draft.column = column;
         draft.visitedCells.push([row, column]);
-        draft.visitedCellsStr.push(`${row}-${column}`);
+        draft.visitedCellsStr.push(`${row},${column}`);
       });
     case SOCKET_EVENT:
       switch (action.event) {
@@ -42,7 +42,7 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
             const {currentState, grid} = action.payload
 
             draft.visitedCells = [[9, 0]];
-            draft.visitedCellsStr = ['9-0'];
+            draft.visitedCellsStr = ['9,0'];
 
             if (currentState === 'playing') {
               draft.canMove = true;

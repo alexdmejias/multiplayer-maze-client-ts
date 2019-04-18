@@ -72,17 +72,21 @@ class MazeComponent extends React.Component<MazeProps> {
           <div className='grid' style={getMazeStyles(50, grid.rows, grid.columns)}>
             { grid.maze.map((row, rowIndex) => {
               return row.map((column, columnIndex) => {
-                const id = `${rowIndex}-${columnIndex}`;
+                const id = `${rowIndex},${columnIndex}`;
                 const hasPlayer = rowIndex === player.row && columnIndex === player.column;
                 const visited = player.visitedCellsStr.includes(id);
+                const isEnding = id === grid.ending.toString();
+                const isStarting = id === grid.starting.toString();
 
                 return <Cell
                   id={id}
                   key={id}
                   type={column}
                   size={50}
-                  player={hasPlayer}
-                  visited={visited}
+                  isEnding={isEnding}
+                  isStarting={isStarting}
+                  isPlayer={hasPlayer}
+                  isVisited={visited}
                 />
               })
             }) }
