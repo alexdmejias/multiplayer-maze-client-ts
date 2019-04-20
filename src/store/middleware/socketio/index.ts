@@ -83,7 +83,7 @@ const socketMiddleware = (store: {dispatch: Function}) => {
       _socketConnect(store.dispatch);
     // } else if (action.type === SESSION_HEART_BEAT_STATE_CHANGE) {
     //   heartbeat = action.newState;
-    } else if (action.socketEvent && socket && socket.emit && heartbeat) {
+    } else if (action.socketEvent && socket && socket.emit /* && heartbeat */) {
       const payload = action.socketPayload || {};
       console.log('%cTX: ' + action.socketEvent, 'color: red; font-weight: bold', payload);
       socket.emit(action.socketEvent, payload);

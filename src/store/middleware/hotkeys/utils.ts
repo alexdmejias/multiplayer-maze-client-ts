@@ -1,4 +1,4 @@
-import {Maze} from '../../store/session/types';
+import {Maze} from '../../session/types';
 
 type DIRECTIONS = 'NORTH' | 'SOUTH' | 'EAST' | 'WEST';
 
@@ -6,7 +6,7 @@ export function getCellType(grid: Maze, row: number, column: number): number {
   return (grid[row] && grid[row][column]) || -1;
 }
 
-export function getNeighborPosition(direction: DIRECTIONS, row: number, column: number): Array<number>{
+export function getNeighborPosition(direction: DIRECTIONS, row: number, column: number): [number, number] {
   if (direction === 'NORTH') { return [row - 1, column]; }
   else if (direction === 'EAST') { return [row, column + 1]; }
   else if (direction === 'SOUTH') { return [row + 1, column]; }

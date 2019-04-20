@@ -7,6 +7,7 @@ export interface Player {
   column: number;
   visitedCells: number[][];
   visitedCellsStr: string[];
+  scored: boolean;
 }
 
 export interface PlayerState extends Player {}

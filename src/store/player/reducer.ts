@@ -2,7 +2,8 @@ import produce from 'immer';
 import {
   PlayerState,
   PlayerActionTypes,
-  PLAYER_MOVED
+  PLAYER_MOVED,
+  PLAYER_SCORED
 } from './types';
 
 import {
@@ -18,11 +19,17 @@ const initialState: PlayerState = {
   row: 9,
   column: 0,
   visitedCells: [],
-  visitedCellsStr: []
+  visitedCellsStr: [],
+  scored: false
 }
 
 export default function(state = initialState, action: PlayerActionTypes | SocketActionTypes) {
   switch (action.type) {
+    case PLAYER_SCORED:
+      return produce(state, draft => {
+        draft.canMove = false;
+        draft.scored = true;
+      });
     case PLAYER_MOVED:
       return produce(state, draft => {
         const {row, column} = action.payload;
@@ -33,16 +40,18 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
       });
     case SOCKET_EVENT:
       switch (action.event) {
-        case 'init-connection':
-          // return produce(state, draft => {
+        // return produce(state, draft => {
           //   draft.canMove = false;
           // });
+        case 'init-connection':
         case 'state-change':
           return produce(state, draft => {
             const {currentState, grid} = action.payload
 
-            draft.visitedCells = [[9, 0]];
-            draft.visitedCellsStr = ['9,0'];
+            draft.visitedCells = [grid.starting];
+            draft.visitedCellsStr = [grid.starting.toString()];
+            draft.row = grid.starting[0];
+            draft.column = grid.starting[1];
 
             if (currentState === 'playing') {
               draft.canMove = true;

@@ -13,7 +13,6 @@
     "immer": "^2.1.4",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-hotkeys": "^1.1.4",
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.8",
     "react95": "^1.0.1",

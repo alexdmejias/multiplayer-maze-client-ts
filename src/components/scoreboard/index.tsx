@@ -12,7 +12,7 @@ class Scoreboard extends React.Component<ScoreboardProps> {
     const {scoreboard} = this.props;
 
     return (
-      <div>
+      <div className="scoreboard panel">
         <h1>Scoreboard:</h1>
         <ul>
           {scoreboard.ids.map(currId => {
