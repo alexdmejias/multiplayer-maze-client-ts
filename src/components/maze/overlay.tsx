@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 interface OverlayProps {
   scored: boolean;
@@ -12,7 +12,7 @@ const Overlay = (props: OverlayProps) => {
         <p>SCORE!</p>
       }
       <p>
-        waiting for next round to begin...
+        waiting for next round to begin{'...'}
       </p>
     </div>
   )

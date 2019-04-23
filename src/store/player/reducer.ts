@@ -47,7 +47,7 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
         case 'state-change':
           return produce(state, draft => {
             const {currentState, grid} = action.payload
-
+            draft.scored = false;
             draft.visitedCells = [grid.starting];
             draft.visitedCellsStr = [grid.starting.toString()];
             draft.row = grid.starting[0];
