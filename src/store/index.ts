@@ -7,7 +7,11 @@ import playerReducer from './player/reducer';
 
 import socketIOMiddleware from './middleware/socketio';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import logger from 'redux-logger';
+import {createLogger} from 'redux-logger';
+
+const logger = createLogger({
+  collapsed: true
+})
 
 const rootReducer = combineReducers({
   scoreboard: scoreboardReducer,
