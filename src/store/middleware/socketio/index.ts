@@ -2,7 +2,9 @@ import * as socketIo from 'socket.io-client';
 import { socketEvent } from './actions'
 import {
   SOCKET_CONNECT,
-  SOCKET_EVENTS
+  SOCKET_EVENTS,
+  SocketPlayerPayload,
+  SocketStateChangePayload
 } from './types';
 
 // TODO
@@ -13,13 +15,16 @@ type StateUnionKeyToValue = {
 function getEventsToSusbscribeTo(dispatch: Function): StateUnionKeyToValue {
   return {
     // server sends this to only one client, when client joins
-    'init-connection': (data: any) => {
+    'init-connection': (data: SocketStateChangePayload | SocketPlayerPayload) => {
       console.log('alexalex - ++++++++++', 'init-connection', data);
       dispatch(socketEvent('init-connection', data));
     },
-    'state-change': (data: any) => {
+    'state-change': (data: SocketStateChangePayload) => {
       console.log('alexalex - ##########', 'state-change', data);
       dispatch(socketEvent('state-change', data));
+    },
+    'player-scored': (data: SocketPlayerPayload) => {
+      dispatch(socketEvent('player-scored', data))
     }
     // 'connect': () => {
     // },
