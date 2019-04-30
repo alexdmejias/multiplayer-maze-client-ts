@@ -1,8 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const borderString = '3px solid black';
-
 const getCellStyles = (size: number, type: number, player: boolean, visited: boolean) => ({
   height: size,
   width: size

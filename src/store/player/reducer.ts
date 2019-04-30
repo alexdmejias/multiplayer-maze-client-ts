@@ -40,28 +40,33 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
       });
     case SOCKET_EVENT:
       switch (action.event) {
-        // return produce(state, draft => {
-          //   draft.canMove = false;
-          // });
         case 'init-connection':
+          return produce(state, draft => {
+            const { player } = action.payload;
+            draft.id = player.id;
+            draft.currentScore = player.currentScore;
+            draft.username = player.username;
+          })
         case 'state-change':
           return produce(state, draft => {
             const {currentState, grid} = action.payload
-            draft.scored = false;
             draft.visitedCells = [grid.starting];
             draft.visitedCellsStr = [grid.starting.toString()];
             draft.row = grid.starting[0];
             draft.column = grid.starting[1];
 
             if (currentState === 'playing') {
+              draft.scored = false;
               draft.canMove = true;
             } else {
               draft.canMove = false;
             }
-            // const {opponents} = action.payload;
-            // draft.ids = opponents.ids;
-            // draft.byId = opponents.byId;
           });
+        case 'player-scored':
+          return produce(state, draft => {
+            const {currentScore} = action.payload.player;
+            draft.currentScore = currentScore;
+          })
         default:
           break;
       }

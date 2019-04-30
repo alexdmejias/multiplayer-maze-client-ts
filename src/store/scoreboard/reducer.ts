@@ -16,7 +16,6 @@ const initialState: ScoreboardState = {
 
 export default function(state = initialState, action: ScoreboardActionTypes | SocketActionTypes) {
   switch (action.type) {
-
     case SOCKET_EVENT:
       switch (action.event) {
         case 'init-connection':
