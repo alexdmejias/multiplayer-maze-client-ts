@@ -2,8 +2,8 @@ import {Maze} from '../../session/types';
 
 type DIRECTIONS = 'NORTH' | 'SOUTH' | 'EAST' | 'WEST';
 
-export function getCellType(grid: Maze, row: number, column: number): number {
-  return (grid[row] && grid[row][column]) || -1;
+export function getCellType(grid: Maze, row: number, column: number): string {
+  return (grid[row] && grid[row][column]) || '';
 }
 
 export function getNeighborPosition(direction: DIRECTIONS, row: number, column: number): [number, number] {
@@ -13,21 +13,17 @@ export function getNeighborPosition(direction: DIRECTIONS, row: number, column: 
   else { return [row, column - 1]; }
 }
 
-export function neighborExists(direction: DIRECTIONS, grid: Maze, row: number, column: number): number {
+export function neighborExists(direction: DIRECTIONS, grid: Maze, row: number, column: number): boolean {
   const [newRow, newColumn] = getNeighborPosition(direction, row, column);
 
-  if (grid[newRow] && grid[newRow][newColumn]) {
-    return grid[newRow][newColumn];
-  } else {
-    return -1;
-  }
+  return !!(grid[newRow] && grid[newRow][newColumn]);
 }
 
-export function isMovementAllowedForType(direction: DIRECTIONS, type: number): boolean {
-  if (direction === 'NORTH' && [2, 5].includes(type)) { return true; }
-  else if (direction === 'EAST' && [3, 6].includes(type)) { return true; }
-  else if (direction === 'SOUTH' && [2, 5].includes(type)) { return true; }
-  else if (direction === 'WEST' && [3, 6].includes(type)) { return true; }
+export function isMovementAllowedForType(direction: DIRECTIONS, type: string): boolean {
+  if (direction === 'NORTH' && ['b', '4', '6'].includes(type)) { return true; }
+  else if (direction === 'EAST' && ['b', '7', '8'].includes(type)) { return true; }
+  else if (direction === 'SOUTH' && ['b', '4', '6'].includes(type)) { return true; }
+  else if (direction === 'WEST' && ['b', '7', '8'].includes(type)) { return true; }
   else { return false; }
 }
 
@@ -47,7 +43,7 @@ export function canMovePlayerToPosition(direction: DIRECTIONS, grid: Maze, row: 
     const neighborType = getCellType(grid, neighborPosition[0], neighborPosition[1]);
     const typeToUse = direction === 'NORTH' || direction === 'EAST' ? currCellType : neighborType;
 
-    if (isMovementAllowedForType(direction, typeToUse) && neighborExists(direction, grid, row, column)) {
+    if (isMovementAllowedForType(direction, typeToUse)) {
       return true;
     } else {
       return false;

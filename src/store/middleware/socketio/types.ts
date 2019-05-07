@@ -22,7 +22,7 @@ export interface SocketStateChangePayload {
     ids: string[]
   },
   grid: {
-    maze: number[][],
+    maze: string[][],
     rows: number,
     columns: number,
     starting: [number, number],

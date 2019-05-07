@@ -1,14 +1,14 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const getCellStyles = (size: number, type: number, player: boolean, visited: boolean) => ({
+const getCellStyles = (size: number) => ({
   height: size,
   width: size
 })
 
 interface CellProps {
   id: string
-  type: number
+  type: string
   size: number
   isPlayer: boolean
   isVisited: boolean
@@ -23,15 +23,15 @@ const Cell = ({id, type, size, isPlayer, isVisited, isEnding, isStarting}: CellP
     player: isPlayer,
     starting: isStarting,
     ending: isEnding,
-    bt: type === 6,
-    br: type === 5
+    bt: ['8', '3', '1'].includes(type),
+    br: ['6', '3', '1', '4'].includes(type)
   });
 
   return (
-    <div className={classes} style={getCellStyles(size, type, isPlayer, isVisited)} >
+    <div className={classes} style={getCellStyles(size)} >
       {id}
         <br />
-      {type}
+      <b>{type}</b>
     </div>
   )
 }
