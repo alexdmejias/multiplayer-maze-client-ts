@@ -24,14 +24,14 @@ const Cell = ({id, type, size, isPlayer, isVisited, isEnding, isStarting}: CellP
     starting: isStarting,
     ending: isEnding,
     bt: ['8', '3', '1'].includes(type),
-    br: ['6', '3', '1', '4'].includes(type)
+    br: ['6', '3', '1'].includes(type)
   });
 
   return (
     <div className={classes} style={getCellStyles(size)} >
-      {id}
+      {/* {id}
         <br />
-      <b>{type}</b>
+      <b>{type}</b> */}
     </div>
   )
 }

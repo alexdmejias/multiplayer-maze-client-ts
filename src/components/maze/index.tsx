@@ -13,8 +13,8 @@ const getMazeStyles = (cellSize: number, rows: number, columns: number) => ({
   display: 'grid',
   gridTemplateRows: `repeat(${rows}, 1fr)`,
   gridTemplateColumns: `repeat(${columns}, 1fr)`,
-  minWidth: `${cellSize * rows}px`,
-  minHeight: `${cellSize * columns}px`,
+  minWidth: `600px`,
+  minHeight: `600px`,
 });
 
 type MazeProps = {
@@ -36,6 +36,8 @@ class MazeComponent extends React.Component<MazeProps> {
         {/* <Overlay show={player.scored || currentState === 'waiting'} /> */}
         <div className='grid' style={getMazeStyles(50, grid.rows, grid.columns)}>
           { grid.maze.map((row, rowIndex) => {
+            const cellSize = 650 / grid.rows;
+
             return row.map((column, columnIndex) => {
               const id = `${rowIndex},${columnIndex}`;
 
@@ -43,7 +45,7 @@ class MazeComponent extends React.Component<MazeProps> {
                 id={id}
                 key={id}
                 type={column}
-                size={50}
+                size={cellSize}
                 isEnding={id === grid.ending.toString()}
                 isStarting={id === grid.starting.toString()}
                 isPlayer={rowIndex === player.row && columnIndex === player.column}

@@ -50,12 +50,12 @@ export default function(state = initialState, action: PlayerActionTypes | Socket
         case 'state-change':
           return produce(state, draft => {
             const {currentState, grid} = action.payload
-            draft.visitedCells = [grid.starting];
-            draft.visitedCellsStr = [grid.starting.toString()];
-            draft.row = grid.starting[0];
-            draft.column = grid.starting[1];
 
             if (currentState === 'playing') {
+              draft.row = grid.starting[0];
+              draft.column = grid.starting[1];
+              draft.visitedCells = [grid.starting];
+              draft.visitedCellsStr = [grid.starting.toString()];
               draft.scored = false;
               draft.canMove = true;
             } else {
