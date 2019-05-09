@@ -83,7 +83,6 @@ p {
   transition: background 200ms;
   color: var(--cell);
   font-size: small;
-  padding: 5px;
 }
 
 .cell.visited {
@@ -92,6 +91,9 @@ p {
 
 .cell.visited.player {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cell.ending {
@@ -109,13 +111,8 @@ p {
   animation: player 1000ms infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
-  width: 1.5rem;
-  height: 1.5rem;
-  left: 50%;
-  margin-left: -.75rem;
-  top: 50%;
-  margin-top: -.75rem;
-  position: absolute;
+  width: 60%;
+  height: 60%;
 }
 
 .cell.bt {
@@ -133,7 +130,7 @@ p {
   }
 
   to {
-    transform: scale(1.35);
+    transform: scale(1.25);
     box-shadow: 0px 0px 5px black
   }
 }
