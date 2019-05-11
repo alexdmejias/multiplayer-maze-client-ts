@@ -8,6 +8,7 @@ import { PlayerState } from '../../store/player/types';
 
 import Cell from './cell';
 import Overlay from './overlay';
+import classNames from 'classnames';
 
 const getMazeStyles = (cellSize: number, rows: number, columns: number) => ({
   display: 'grid',
@@ -23,12 +24,15 @@ type MazeProps = {
 }
 
 class MazeComponent extends React.Component<MazeProps> {
-
   render() {
     const {session: {grid, currentState}, player} = this.props;
+    const panelClasses = classNames({
+      panel: true,
+      shake: player.scored
+    });
 
     return (
-      <div className="panel" style={{position: 'relative'}}>
+      <div className={panelClasses} style={{position: 'relative'}}>
         {
           (currentState === 'waiting' || player.scored) &&
           <Overlay scored={player.scored} />
