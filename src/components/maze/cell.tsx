@@ -19,6 +19,7 @@ interface CellProps {
 const Cell = ({id, type, size, isPlayer, isVisited, isEnding, isStarting}: CellProps) => {
   const classes = classnames({
     cell: true,
+    [`cell-type-${type}`]: true,
     visited: isVisited,
     player: isPlayer,
     starting: isStarting,

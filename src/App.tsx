@@ -7,10 +7,20 @@ import { socketConnect } from './store/middleware/socketio/actions';
 import Scoreboard from './components/scoreboard';
 import Maze from './components/maze';
 import Settings from './components/settings';
+import Clock from './components/clock';
 
 type AppProps = {
   connect: Function
 }
+
+const Debug = connect( null, (d) => ({
+  debug: (s) => d({ type: 'YOLOG', socketEvent: `debug:time-${s}`})
+}))((props: any) => (
+  <div>
+    <p onClick={() => props.debug('stop')}>stop</p>
+    <p onClick={() => props.debug('play')}>play</p>
+  </div>
+))
 
 const App = (props: AppProps) => {
   useEffect(() => {
@@ -19,6 +29,8 @@ const App = (props: AppProps) => {
 
   return (
     <div className="App">
+      <Clock />
+      <Debug />
       <Settings />
       <Scoreboard />
       <Maze />
