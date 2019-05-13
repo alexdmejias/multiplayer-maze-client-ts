@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import {AppStoreState} from '../../store';
 import {SessionState, Maze} from '../../store/session/types';
@@ -68,10 +67,4 @@ const mapStateToProps = (state: AppStoreState) => ({
   player: state.player
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  // playerScored: () => {
-  //   dispatch(playerScored())
-  // }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MazeComponent)
+export default connect(mapStateToProps)(MazeComponent)
