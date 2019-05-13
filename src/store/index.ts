@@ -1,10 +1,11 @@
-import HotKeysMiddleware from './middleware/hotkeys';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import scoreboardReducer from './scoreboard/reducer';
 import uiReducer from './ui/reducer';
 import sessionReducer from './session/reducer';
 import playerReducer from './player/reducer';
 
+import SoundsMiddleware from './middleware/sounds';
+import HotKeysMiddleware from './middleware/hotkeys';
 import socketIOMiddleware from './middleware/socketio';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createLogger} from 'redux-logger';
@@ -23,7 +24,7 @@ const rootReducer = combineReducers({
 export type AppStoreState = ReturnType<typeof rootReducer>;
 
 export default function configureStore() {
-  const middlewares = [logger, socketIOMiddleware, HotKeysMiddleware];
+  const middlewares = [logger, socketIOMiddleware, HotKeysMiddleware, SoundsMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares);
 
   const store = createStore(
