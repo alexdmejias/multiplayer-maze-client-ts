@@ -8,5 +8,6 @@ export interface SessionState {
     starting: [number, number],
     ending: [number, number]
   },
-  currentState: 'waiting' | 'playing';
+  currentState: 'waiting' | 'playing' | 'first',
+  duration: number
 }

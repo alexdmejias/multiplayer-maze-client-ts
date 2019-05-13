@@ -21,7 +21,8 @@ const initialState: SessionState = {
     starting: [0, 9],
     ending: [9, 0]
   },
-  currentState: 'waiting'
+  currentState: 'waiting',
+  duration: 0
 }
 
 export default function(state = initialState, action: SocketActionTypes) {
@@ -33,6 +34,7 @@ export default function(state = initialState, action: SocketActionTypes) {
           return produce(state, draft => {
             draft.currentState = action.payload.currentState;
             const {currentState, grid} = action.payload
+            draft.currentState = 'first';
             if (currentState === 'playing') {
               draft.grid = { ...grid };
             }
@@ -40,7 +42,8 @@ export default function(state = initialState, action: SocketActionTypes) {
 
         case 'state-change':
           return produce(state, draft => {
-            const {currentState, grid} = action.payload
+            const {currentState, grid, duration} = action.payload
+            draft.duration = duration;
             if (currentState === 'playing') {
               draft.grid = { ...grid}
             }

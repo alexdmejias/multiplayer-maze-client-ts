@@ -28,7 +28,8 @@ export interface SocketStateChangePayload {
     starting: [number, number],
     ending: [number, number],
   },
-  currentState: 'waiting' | 'playing'
+  currentState: 'waiting' | 'playing',
+  duration: number
 }
 
 interface SocketEventAction {
