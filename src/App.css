@@ -4,6 +4,7 @@
   --player: rgb(255, 50, 0);
   --special-cell: dodgerblue;
   --visited-cell: lightgrey;
+  --player-background: grey;
   --cell: grey;
   --cog: dodgerblue;
   --cog-background: black;
@@ -25,6 +26,7 @@ p {
 
 .App {
   display: flex;
+  flex-direction: column;
 }
 
 .panel {
@@ -41,6 +43,18 @@ p {
     8px 8px var(--panel-shadow),
     9px 9px var(--panel-shadow),
     10px 10px var(--panel-shadow);
+}
+
+.clock {
+
+}
+
+.main {
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
 }
 
 .scoreboard {
@@ -84,6 +98,10 @@ p {
   flex-direction: column;
 }
 
+.overlay p {
+  text-align: center;
+}
+
 .grid {
   padding: 10px;
   outline: 3px dotted;
@@ -106,6 +124,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--player-background);
 }
 
 .cell.ending {

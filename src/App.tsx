@@ -29,11 +29,15 @@ const App = (props: AppProps) => {
 
   return (
     <div className="App">
-      <Clock />
       <Debug />
-      <Settings />
-      <Scoreboard />
-      <Maze />
+      <Clock />
+      <div className="main">
+        <div className="sidebar">
+          <Settings />
+          <Scoreboard />
+        </div>
+        <Maze />
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Settings = () => {
   const showDialog = () => {
-    window.alert("wasd");
+    window.prompt("wasd", 'wasdwasd');
   }
 
   return <div className="panel">

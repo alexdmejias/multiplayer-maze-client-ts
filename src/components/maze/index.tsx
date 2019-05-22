@@ -22,44 +22,41 @@ type MazeProps = {
   player: PlayerState
 }
 
-class MazeComponent extends React.Component<MazeProps> {
-  render() {
-    const {session: {grid, currentState}, player} = this.props;
-    const panelClasses = classNames({
-      panel: true,
-      shake: player.scored
-    });
+const MazeComponent = ({session: {grid, currentState}, player}: MazeProps) => {
+  const panelClasses = classNames({
+    panel: true,
+    shake: player.scored
+  });
 
-    return (
-      <div className={panelClasses} style={{position: 'relative'}}>
-        {
-          (currentState === 'waiting' || player.scored) &&
-          <Overlay scored={player.scored} />
-        }
-        {/* <Overlay show={player.scored || currentState === 'waiting'} /> */}
-        <div className='grid' style={getMazeStyles(50, grid.rows, grid.columns)}>
-          { grid.maze.map((row, rowIndex) => {
-            const cellSize = 650 / grid.rows;
+  return (
+    <div className={panelClasses} style={{position: 'relative'}}>
+      {
+        (currentState === 'waiting' || player.scored) &&
+        <Overlay scored={player.scored} />
+      }
+      {/* <Overlay show={player.scored || currentState === 'waiting'} /> */}
+      <div className='grid' style={getMazeStyles(50, grid.rows, grid.columns)}>
+        { grid.maze.map((row, rowIndex) => {
+          const cellSize = 650 / grid.rows;
 
-            return row.map((column, columnIndex) => {
-              const id = `${rowIndex},${columnIndex}`;
+          return row.map((column, columnIndex) => {
+            const id = `${rowIndex},${columnIndex}`;
 
-              return <Cell
-                id={id}
-                key={id}
-                type={column}
-                size={cellSize}
-                isEnding={id === grid.ending.toString()}
-                isStarting={id === grid.starting.toString()}
-                isPlayer={rowIndex === player.row && columnIndex === player.column}
-                isVisited={player.visitedCellsStr.includes(id)}
-              />
-            })
-          }) }
-        </div>
+            return <Cell
+              id={id}
+              key={id}
+              type={column}
+              size={cellSize}
+              isEnding={id === grid.ending.toString()}
+              isStarting={id === grid.starting.toString()}
+              isPlayer={rowIndex === player.row && columnIndex === player.column}
+              isVisited={player.visitedCellsStr.includes(id)}
+            />
+          })
+        }) }
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 const mapStateToProps = (state: AppStoreState) => ({

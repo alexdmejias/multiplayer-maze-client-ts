@@ -1,4 +1,6 @@
-import * as socketIo from 'socket.io-client';
+import _sample from 'lodash.sample';
+import _random from 'lodash.random';
+import io from "socket.io-client";
 import { socketEvent } from './actions'
 import {
   SOCKET_CONNECT,
@@ -11,6 +13,14 @@ import {
 type StateUnionKeyToValue = {
   [K in string]?: Function
 };
+
+const colors = ['red', 'blue', 'green', 'yellow'];
+const verbs = ['jumping', 'eating', 'dancing'];
+const things = ['car', 'plane', 'program', 'computer', 'keyboard'];
+
+function generateUserName() {
+  return `${_sample(colors)}-${_sample(verbs)}-${_sample(things)}-${_random(999)}`;
+}
 
 function getEventsToSusbscribeTo(dispatch: Function): StateUnionKeyToValue {
   return {
@@ -55,7 +65,15 @@ const socketMiddleware = (store: {dispatch: Function}) => {
   function _socketConnect (dispatch: Function) {
     if (true) {
       console.log('attempting to connect to socket server...');
-      socket = socketIo.connect('http://localhost:3005');
+      socket = io('http://localhost:3005', {
+        query: {
+          name: generateUserName()
+        },
+        autoConnect: false,
+      });
+
+      socket.open();
+
       // socket.on = _overWriteTX();
       const eventsToListenTo = getEventsToSusbscribeTo(dispatch);
 

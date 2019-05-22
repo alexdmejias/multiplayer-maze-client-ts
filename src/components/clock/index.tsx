@@ -26,7 +26,9 @@ const Clock = ({session}: ClockProps) => {
 
   const timeLeft = session.duration - (1000 * index);
   return (
-    <p>{timeLeft} seconds left</p>
+    <div className="clock panel">
+      <p>{timeLeft} seconds left</p>
+    </div>
   )
 }
 
